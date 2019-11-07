@@ -1,0 +1,12 @@
+on: [push]
+
+jobs:
+  update_app_settings_job:
+    runs-on: ubuntu-latest
+    name: Upload the application settings from github secrets to azure web app
+    steps:
+      - name: Upload the application settings
+        id: upload_app_settings_id
+        uses: actions/upload_app_settings@master
+        with:
+          app_secrets: ${{ secrets.APP_SECRETS }}
