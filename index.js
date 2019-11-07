@@ -6,8 +6,8 @@ try {
     const nameToGreet = core.getInput('who-to-greet');
     const secrets = JSON.parse(nameToGreet);
     for (var key in secrets) {
-        if (p.hasOwnProperty(key)) {
-            console.log(key + " -> " + p[key]);
+        if (secrets.hasOwnProperty(key)) {
+            console.log(key + " -> " + secrets[key]);
         }
     }
     
