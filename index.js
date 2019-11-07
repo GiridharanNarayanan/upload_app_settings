@@ -1,5 +1,4 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
 
 const { promisify } = require('util');
 const { exec } = require('child_process');
@@ -11,23 +10,25 @@ async function run() {
 
         try {
             await execAsyncInternal(`az --version`);
-            console.log("Az CLI is available");
-        } catch {
-            console.log("Could not find Azure CLI. Please install from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest");
+            console.log("Azure CLI is available.");
+        } catch (error) {
+            console.log("Unable to find Azure CLI");
+            core.setFailed(error.message);
+            return;
         }
 
-        // `who-to-greet` input defined in action metadata file
-        const nameToGreet = core.getInput('app_secrets');
-        const secrets = JSON.parse(nameToGreet);
+        const appSecretsJSON = core.getInput('app_secrets');
+        const secrets = JSON.parse(appSecretsJSON);
         for (var key in secrets) {
             if (secrets.hasOwnProperty(key)) {
                 try {
                     await execAsyncInternal(`az functionapp config appsettings set --settings ${key}=${secrets[key]} --resource-group acetest --name ssr-react-next-function`);
-                    console.log("Added the secret to app setting");
-                } catch {
-                    console.log("Failed to add secrets to function");
+                    console.log("Added the secret to app setting.");
+                } catch (error) {
+                    console.log("Failed to add secrets to app setting.");
+                    core.setFailed(error.message);
+                    return;
                 }
-                
             }
         }
     } catch (error) {
