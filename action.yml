@@ -1,8 +1,16 @@
 name: 'Upload app settings'
 description: 'Upload the application settings from github secrets to azure web app'
 inputs:
-  upload_app_settings:  # id of input
-    description: 'JSON string with '
+  app_settings:  # id of input
+    description: 'JSON string with app secrets'
+    required: true
+    default: ''
+  az_func_name: 
+    description: 'Azure function name'
+    required: true
+    default: ''
+  az_func_resource_group: 
+    description: 'Azure function resource group'
     required: true
     default: ''
 runs:

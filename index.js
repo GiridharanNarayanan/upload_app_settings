@@ -18,8 +18,12 @@ async function run() {
         }
 
         const appSecretsJSON = core.getInput('app_secrets');
-        if (!appSecretsJSON) {
-            core.setFailed("'app_secrets' input value is null or empty.");
+        const functionName = core.getInput('az_func_name');
+        const functionResourceGroup = core.getInput('az_func_resource_group');
+        if (!appSecretsJSON
+            || !functionName
+            || !functionResourceGroup) {
+            core.setFailed("Either of the input value is null or empty.");
             return;
         }
 
@@ -27,7 +31,7 @@ async function run() {
         for (var key in secrets) {
             if (secrets.hasOwnProperty(key)) {
                 try {
-                    await execAsyncInternal(`az functionapp config appsettings set --settings ${key}=${secrets[key]} --resource-group acetest --name ssr-react-next-function`);
+                    await execAsyncInternal(`az functionapp config appsettings set --settings ${key}=${secrets[key]} --resource-group ${functionResourceGroup} --name ${functionName}`);
                     console.log("Added the secret to app setting.");
                 } catch (error) {
                     console.log("Failed to add secrets to app setting.");
