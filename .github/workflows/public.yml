@@ -5,6 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Upload the application settings from github secrets to azure web app
     steps:
+      - uses: actions/checkout@v1
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Upload the application settings
         id: upload_app_settings_id
         uses: GiridharanNarayanan/upload_app_settings@master
