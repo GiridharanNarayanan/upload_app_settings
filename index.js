@@ -14,7 +14,7 @@ async function run() {
         for (var key in secrets) {
             if (secrets.hasOwnProperty(key)) {
                 try {
-                    await execAsync(`az --version`);
+                    await execAsyncInternal(`az --version`);
                 } catch {
                     console.log("Could not find Azure CLI. Please install from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest");
                 }
@@ -31,4 +31,4 @@ async function run() {
     }
 }
 
-run()
+run();

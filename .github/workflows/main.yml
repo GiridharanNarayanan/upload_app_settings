@@ -6,6 +6,11 @@ jobs:
     name: A job to say hello
     steps:
       # To use this repository's private action, you must check out the repository
+      - uses: actions/checkout@v1
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Checkout
         uses: actions/checkout@v1
       - name: Hello world action step
