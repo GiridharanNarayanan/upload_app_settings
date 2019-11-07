@@ -1,9 +1,9 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  update_app_settings_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Upload the application settings from github secrets to azure web app
     steps:
       # To use this repository's private action, you must check out the repository
       - uses: actions/checkout@v1
@@ -13,11 +13,8 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Hello world action step
+      - name: Upload app settings
         uses: ./ # Uses an action in the root directory
-        id: hello
+        id: upload_app_settings
         with:
-          who-to-greet: ${{ secrets.COSMOS_SECRETS }}
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          app_secrets: ${{ secrets.APP_SECRETS }}

@@ -1,13 +1,10 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Upload app settings'
+description: 'Upload the application settings from github secrets to azure web app'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet in the log'
+  upload_app_settings:  # id of input
+    description: 'JSON string with '
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+    default: ''
 runs:
   using: 'node12'
   main: 'index.js'
