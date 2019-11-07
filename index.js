@@ -18,6 +18,11 @@ async function run() {
         }
 
         const appSecretsJSON = core.getInput('app_secrets');
+        if (!appSecretsJSON) {
+            core.setFailed("'app_secrets' input value is null or empty.");
+            return;
+        }
+
         const secrets = JSON.parse(appSecretsJSON);
         for (var key in secrets) {
             if (secrets.hasOwnProperty(key)) {
