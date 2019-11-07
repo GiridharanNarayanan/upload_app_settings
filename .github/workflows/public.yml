@@ -7,6 +7,6 @@ jobs:
     steps:
       - name: Upload the application settings
         id: upload_app_settings_id
-        uses: actions/upload_app_settings@master
+        uses: GiridharanNarayanan/upload_app_settings@master
         with:
           app_secrets: ${{ secrets.APP_SECRETS }}
