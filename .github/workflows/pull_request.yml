@@ -18,3 +18,4 @@ jobs:
         echo $GITHUB_EVENT_PATH
         value=$(<$GITHUB_EVENT_PATH)
         echo "$value"
+        jq '.pull_request.id' $GITHUB_EVENT_PATH
