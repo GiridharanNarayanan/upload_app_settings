@@ -16,3 +16,5 @@ jobs:
     - name: generate jetzt config
       run: |
         echo $GITHUB_EVENT_PATH
+        value=$(<$GITHUB_EVENT_PATH)
+        echo "$value"
