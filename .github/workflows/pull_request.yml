@@ -17,7 +17,7 @@ jobs:
       run: |
         name=$(echo "${{ secrets.AZ_FUNC_NAME }}-$(eval "jq '.pull_request.id' $GITHUB_EVENT_PATH")}" | sed "s/[^a-zA-Z0-9\-]/-/g")
         echo "Function name: $name"
-        echo "::set-env name=action_state::yellow"
+        echo "::set-env name=pull_request_id::$name"
     - name: use env
       run: |
-        echo "${{ env.action_state }}"
+        echo "${{ env.pull_request_id }}"
