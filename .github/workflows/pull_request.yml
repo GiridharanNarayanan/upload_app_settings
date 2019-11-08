@@ -15,11 +15,8 @@ jobs:
     steps:
     - name: generate jetzt config
       run: |
-        echo $GITHUB_EVENT_PATH
-        value=$(<$GITHUB_EVENT_PATH)
-        x="jq '.pull_request.id' $GITHUB_EVENT_PATH"
-        echo "$x"
-        y=$(eval "$x")
-        echo "$y"
-        name=$(echo "${{ secrets.AZ_FUNC_NAME }}-$y}" | sed "s/^[ \t]*//;s/[ \t]*$//" |sed "s/[^a-zA-Z0-9\-]/-/g")
+        fetch_pull_request_id="jq '.pull_request.id' $GITHUB_EVENT_PATH"
+        pull_request_id=$(eval "$fetch_pull_request_id")
+        echo "$pull_request_id"
+        name=$(echo "${{ secrets.AZ_FUNC_NAME }}-$pull_request_id}" | sed "s/[^a-zA-Z0-9\-]/-/g")
         echo "$name"
