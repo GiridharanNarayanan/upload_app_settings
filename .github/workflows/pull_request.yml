@@ -17,6 +17,9 @@ jobs:
       run: |
         echo $GITHUB_EVENT_PATH
         value=$(<$GITHUB_EVENT_PATH)
-        suffix=jq '.pull_request.id' $GITHUB_EVENT_PATH
-        name=$(echo "${{ secrets.AZ_FUNC_NAME }}-${{ suffix }}" | sed "s/[^a-zA-Z0-9\-]/-/g" | cut -c 6-60)
-        echo name
+        x="jq '.pull_request.id' $GITHUB_EVENT_PATH"
+        echo "$x"
+        y=$(eval "$x")
+        echo "$y"
+        name=$(echo "${{ secrets.AZ_FUNC_NAME }}-$y}" | sed "s/[^a-zA-Z0-9\-]/-/g" | cut -c 6-60)
+        echo "$name"
