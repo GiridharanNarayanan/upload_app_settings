@@ -17,6 +17,6 @@ jobs:
       run: |
         fetch_pull_request_id="jq '.pull_request.id' $GITHUB_EVENT_PATH"
         pull_request_id=$(eval "$fetch_pull_request_id")
-        echo "$pull_request_id"
+        echo "Pull request id: $pull_request_id"
         name=$(echo "${{ secrets.AZ_FUNC_NAME }}-$pull_request_id}" | sed "s/[^a-zA-Z0-9\-]/-/g")
-        echo "$name"
+        echo "Function name: $name"
