@@ -6,12 +6,9 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     env:
       node-version: 12.x
-
     steps:
     - name: set env
       run: |
